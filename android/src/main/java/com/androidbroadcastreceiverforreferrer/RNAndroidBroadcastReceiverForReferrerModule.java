@@ -5,7 +5,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 
 public class RNAndroidBroadcastReceiverForReferrerModule extends ReactContextBaseJavaModule {
 
-    private final ReactApplicationContext reactContext;
+    public static ReactApplicationContext reactContext;
 
     public RNAndroidBroadcastReceiverForReferrerModule(ReactApplicationContext reactContext) {
         super(reactContext);

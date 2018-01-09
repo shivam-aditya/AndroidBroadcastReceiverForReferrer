@@ -60,27 +60,24 @@ public class ReferrerBroadcastReceiver extends BroadcastReceiver {
         }
 
         String referrer = intent.getStringExtra("referrer");
-        Log.d("AppInstall", referrer);
         Log.d("ReactNativeJS", "ReferrerBroadcastReceiver referrer: " + referrer);
-
-        // Will require for sending other events
-        // savePreference(context,"GoogleInstallReferrer",referrer);
-
-        //save the intent uri in shared preferences
-        //PreferenceManager.saveString(Constants.REFERRER_RECEIVER_INTENT_URI, intent.toUri(Intent.URI_INTENT_SCHEME));
-
-        //OnAppRegistrationController.getInstance().sendGoogleReferrerDetails();
-        //AppsFlyerHelper.extractDeepLinkFromReferrer(referrer);
 
         WritableMap map = new WritableNativeMap();
         map.putString("referrer", referrer);
-        sendEvent((ReactContext)context,"ReferrerBroadcastReceiver" ,map);
-        //MSREventBridgeModule.emitEvent("ReferrerBroadcastReceiver", map);
+        sendEvent("GReferrerBroadcastReceiver" ,map);
     }
 
-    private void sendEvent(ReactContext reactContext, String eventName, WritableMap map) {
-        reactContext
-            .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-            .emit(eventName, map);
+    private void sendEvent(String eventName, WritableMap map) {
+        try{
+            ReactContext reactContext = RNAndroidBroadcastReceiverForReferrerModule.reactContext;
+
+            reactContext
+                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                    .emit(eventName, map);
+        }
+        catch(Exception e){
+            Log.d("ReactNativeJS","Exception in sendEvent in ReferrerBroadcastReceiver is:"+e.toString());
+        }
+
     }
 }
