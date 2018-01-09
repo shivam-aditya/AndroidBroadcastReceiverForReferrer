@@ -1,6 +1,6 @@
 {
   "name": "react-native-android-broadcast-receiver-for-referrer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This is a library for getting the referrer send by google broadcast on successful app install",
   "main": "index.js",
   "scripts": {
