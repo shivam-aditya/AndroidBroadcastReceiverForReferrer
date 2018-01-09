@@ -26,13 +26,31 @@
   	```
       compile project(':react-native-android-broadcast-receiver-for-referrer')
   	```
-
+4. Insert the following lines inside the AndroidManifest.xml in `android/app/src/main/AndroidManifest.xml`:
+  	```
+	  <manifest ....>
+	  		.....
+			<application ...>
+					.....
+			        <receiver
+						android:name="com.androidbroadcastreceiverforreferrer.ReferrerBroadcastReceiver"
+						android:enabled="true"
+						android:exported="true">
+						<intent-filter>
+							<action android:name="com.android.vending.INSTALL_REFERRER"/>
+						</intent-filter>
+        			</receiver>
+   			</application>
+      </manifest>
+  	```
 
 ## Usage
 ```javascript
-import RNAndroidBroadcastReceiverForReferrer from 'react-native-android-broadcast-receiver-for-referrer';
+import { DeviceEventEmitter } from "react-native";
 
-// TODO: What to do with the module?
-RNAndroidBroadcastReceiverForReferrer;
+//Add it in componentWillMount or somewhere where it will get executed at the start of app 
+DeviceEventEmitter.addListener('GReferrerBroadcastReceiver', function (map) {
+    console.log('Google Broadcast referrer data is: ' + map.referrer;
+});;
 ```
   
