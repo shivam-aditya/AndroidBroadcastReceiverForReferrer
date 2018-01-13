@@ -2,11 +2,10 @@
 buildscript {
     repositories {
         jcenter()
-        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:2.3.3'
     }
 }
 
@@ -14,6 +13,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 25
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         minSdkVersion 16
@@ -33,7 +33,6 @@ repositories {
         // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
         url "$projectDir/../../../node_modules/react-native/android"
     }
-    google()
 }
 
 dependencies {
