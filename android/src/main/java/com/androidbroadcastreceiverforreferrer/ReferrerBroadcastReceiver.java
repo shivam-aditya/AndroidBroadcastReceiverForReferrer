@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
@@ -19,6 +20,7 @@ import java.util.Set;
 
 public class ReferrerBroadcastReceiver extends BroadcastReceiver {
     public static final String INSTALL_ACTION = "com.android.vending.INSTALL_REFERRER";
+    public static String referrer;
 
     private static void savePreference(Context context, String key, Object value) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("googleReferrerSharedPreferences", Context.MODE_PRIVATE);
@@ -59,7 +61,7 @@ public class ReferrerBroadcastReceiver extends BroadcastReceiver {
             return;
         }
 
-        String referrer = intent.getStringExtra("referrer");
+        referrer = intent.getStringExtra("referrer");
         Log.d("ReactNativeJS", "ReferrerBroadcastReceiver referrer: " + referrer);
 
         WritableMap map = new WritableNativeMap();
@@ -71,8 +73,7 @@ public class ReferrerBroadcastReceiver extends BroadcastReceiver {
         try{
             ReactContext reactContext = RNAndroidBroadcastReceiverForReferrerModule.reactContext;
 
-            reactContext
-                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                     .emit(eventName, map);
         }
         catch(Exception e){

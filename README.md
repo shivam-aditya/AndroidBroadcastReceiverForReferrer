@@ -57,5 +57,12 @@ DeviceEventEmitter.addListener('GReferrerBroadcastReceiver', function (map) {
 componentWillUnmount() {
     DeviceEventEmitter.removeListener('GReferrerBroadcastReceiver'); 
   }
+
+//You can also get the referrer which is stored in the local variable by
+import RNAndroidBroadcastReceiverForReferrer from 'react-native-android-broadcast-receiver-for-referrer'; 
+
+//This will return the referrer value if we have got it other will return "NOT AVAILABLE"
+let referrerValue = await RNAndroidBroadcastReceiverForReferrer.getReferrerData();
+
 ```
   
