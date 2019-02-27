@@ -50,8 +50,8 @@ import { DeviceEventEmitter } from "react-native";
 
 //Add it in componentWillMount or somewhere where it will get executed at the start of app 
 DeviceEventEmitter.addListener('GReferrerBroadcastReceiver', function (map) {
-    console.log('Google Broadcast referrer data is: ' + map.referrer;
-});;
+    console.log('Google Broadcast referrer data is: ' + map.referrer);
+});
 
 //Do not forget to remove the listener at componentWillUnmount 
 componentWillUnmount() {
